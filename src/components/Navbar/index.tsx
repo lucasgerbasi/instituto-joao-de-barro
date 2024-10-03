@@ -14,9 +14,15 @@ export function Navbar() {
         </Link>
       </div>
       <ul className="navLinks">
+
+      <li className="navItem">
+          <Link to="/projetos" className="link">
+            Projetos
+          </Link>
+        </li>
         <li className="navItem">
-          <Link to="/voluntarios" className="link">
-            Voluntários
+          <Link to="/noticias" className="link">
+            Notícias
           </Link>
         </li>
         <li className="navItem">
@@ -25,13 +31,16 @@ export function Navbar() {
           </Link>
         </li>
         <li className="navItem">
-          <Link to="/contatos" className="link">
-            Contatos
+          <Link to="/sobre" className="link">
+            Sobre Nós
           </Link>
         </li>
         <li className="navItem">
-          <Link to="/sobre" className="link">
-            Sobre o Instituto
+            <span className="link">Transforme vidas</span>
+        </li>
+        <li className="navItem">
+          <Link to="/contatos" className="link">
+            Fale Conosco
           </Link>
         </li>
         <li className="navItem">

@@ -141,14 +141,34 @@
             }
 
             .dados-btn {
+                align-items: center;
                 background-color: #ffc72c;
-                color: black;
+                padding: 0.75rem 1.5rem;
+                border-radius: 10px;
+                gap: 10px;
+                justify-content: center;
+                padding: 8px;
+                position: relative;
+                cursor: pointer;
+                color: #fff;
                 margin-right: 15px;
+                font-weight: bold;
+                width: 80px;
             }
 
             .excluir-btn {
-                background-color: #d3455b;
-                color: white;
+                align-items: center;
+                background-color: #DF7046;
+                padding: 0.75rem 1.5rem;
+                border-radius: 10px;
+                gap: 10px;
+                justify-content: center;
+                padding: 8px;
+                position: relative;
+                cursor: pointer;
+                color: #fff;
+                font-weight: bold;
+                width: 80px;
             }
         }
     }

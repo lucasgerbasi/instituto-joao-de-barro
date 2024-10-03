@@ -10,6 +10,7 @@ import { Main } from "./components/Main";
 import AtualizarInformacoes from "./Screens/AtualizarInformacoes";
 import Registro from "./Screens/RegistroBeneficiario";
 import AtualizarInformacoesVisitas from "./Screens/atualizarInformacoesVisitas";
+import VisualizarInfo from "./Screens/VisualizarInfo";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/atualizar" element={<AtualizarInformacoes />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/visitas" element={<AtualizarInformacoesVisitas />} />
+          <Route path="/visualizar" element={<VisualizarInfo />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

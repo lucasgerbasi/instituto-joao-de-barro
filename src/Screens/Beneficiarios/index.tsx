@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import "@styles/global.scss";
 
 interface Familia {
@@ -22,7 +22,7 @@ export function Beneficiarios() {
 
   const handleTabClick = (tab: 'familias' | 'visitas' | 'aprovados') => {
     setActiveTab(tab);
-    setSearchTerm(''); // Clear search term when tab changes
+    setSearchTerm('');
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,14 +93,14 @@ export function Beneficiarios() {
             className="table-btn dados-btn" 
             onClick={() => {
               if (activeTab === 'visitas') {
-                navigate('/visitas'); // Redirect to /visitas if in visitas tab
+                navigate('/visitas');
               } else {
-                navigate('/atualizar'); // Default action for other tabs
+                navigate('/atualizar');
               }
             }}>
-            Dados
+            DADOS
           </button>
-            <button className="table-btn excluir-btn">Excluir</button>
+            <button className="table-btn excluir-btn">EXCLUIR</button>
           </td>
         </tr>
       );
