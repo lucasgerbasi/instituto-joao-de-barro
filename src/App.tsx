@@ -11,6 +11,7 @@ import AtualizarInformacoes from "./Screens/AtualizarInformacoes";
 import Registro from "./Screens/RegistroBeneficiario";
 import AtualizarInformacoesVisitas from "./Screens/atualizarInformacoesVisitas";
 import VisualizarInfo from "./Screens/VisualizarInfo";
+import RegistroVisita from "./Screens/RegistroVisita";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           <Route path="beneficiarios" element={<Beneficiarios />} />
           <Route path="/atualizar/:familiaId" element={<AtualizarInformacoes/>} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/visitas" element={<AtualizarInformacoesVisitas />} />
+          <Route path="/visitas/:id" element={<AtualizarInformacoesVisitas />} />
           <Route path="/visualizar" element={<VisualizarInfo />} />
+          <Route path="/registroVisita" element={<RegistroVisita />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

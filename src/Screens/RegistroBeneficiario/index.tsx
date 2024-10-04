@@ -85,14 +85,6 @@ const Registro = () => {
                         onChange={(e) => setNomeFamilia(e.target.value)}
                     />
 
-                    <label>Status da Família:</label>
-                    <input
-                        type="text"
-                        placeholder="Status da Família"
-                        value={statusFamilia}
-                        onChange={(e) => setStatusFamilia(e.target.value)}
-                    />
-
                     <label>Nome Principal:</label>
                     <input
                         type="text"
@@ -160,6 +152,14 @@ const Registro = () => {
 
                 <div className="dropdown-button-group">
                     <div className="dropdown-group">
+                        <label>Status da Família:</label>
+                        <select value={statusFamilia} onChange={(e) => setStatusFamilia(e.target.value)} >
+                            <option value="">Selecione uma opção</option>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Negado">Negado</option>
+                            <option value="Em análise">Em análise</option>
+                        </select>
+
                         <label>Familiar Extras</label>
                         <select value={familiarExtras} onChange={(e) => setFamiliarExtras(e.target.value)}>
                             <option value="">Selecione uma opção</option>

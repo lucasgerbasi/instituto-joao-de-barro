@@ -30,7 +30,7 @@ const AtualizarInformacoes = () => {
             try {
                 const response = await api.get(`/familias/${familiaId}`);
                 const familia = response.data;
-    
+
                 setName(familia.name || "");
                 setStatus(familia.status || "");
                 setNomePrincipal(familia.nomePrincipal || "");
@@ -56,17 +56,17 @@ const AtualizarInformacoes = () => {
                 }
             }
         };
-    
+
         fetchFamilia();
     }, [familiaId]);
-    
+
 
     const atualizarFamilia = async () => {
         if (!name || !status || !nomePrincipal || !cpf || !endereco || !cep || !renda || !telefone || !telefone2 || !comoChegou || !familiarExtras || !dadosImovel || !necessidadeFamilia) {
             alert("Por favor, preencha todos os campos.");
             return;
         }
-    
+
         const data = {
             name,
             status,
@@ -82,11 +82,11 @@ const AtualizarInformacoes = () => {
             dadosImovel,
             necessidadeFamilia,
         };
-    
+
         try {
-            await api.put(`/familias/${familiaId}`, data); 
+            await api.put(`/familias/${familiaId}`, data);
             console.log("Family updated successfully!");
-    
+
             navigate('/beneficiarios');
         } catch (err) {
             console.error("Error during update: " + err);
@@ -125,15 +125,7 @@ const AtualizarInformacoes = () => {
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Nome da Família"
                     />
-
-                    <label>Status da família:</label>
-                    <input
-                        type="text"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                        placeholder="Status da família"
-                    />
-
+                    
                     <label>Nome Principal:</label>
                     <input
                         type="text"
@@ -189,7 +181,7 @@ const AtualizarInformacoes = () => {
                         onChange={(e) => setTelefone2(e.target.value)}
                         placeholder="Telefone 2"
                     />
-                    
+
                     <label>Como chegou ao instituto:</label>
                     <input
                         type="text"
@@ -201,6 +193,15 @@ const AtualizarInformacoes = () => {
 
                 <div className='dropdown-button-group'>
                     <div className="dropdown-group">
+
+                        <label>Status da Família:</label>
+                        <select value={status} onChange={(e) => setStatus(e.target.value)} >
+                            <option value="">Selecione uma opção</option>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Negado">Negado</option>
+                            <option value="Em análise">Em análise</option>
+                        </select>
+
                         <label>Familiar Extras</label>
                         <select value={familiarExtras} onChange={(e) => setFamiliarExtras(e.target.value)}>
                             <option value="">Selecione uma opção</option>

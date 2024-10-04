@@ -10,6 +10,7 @@ export interface Familia {
   situacao: string;
   numeroFamiliares: number;
   priority: boolean;
+  status: string;
 }
 
 export interface Visit {
@@ -19,40 +20,25 @@ export interface Visit {
   relatorio: string;
 }
 
-export interface Aprovado {
-  id: number;
-  name: string;
-  renda: number;
-  situacao: string;
-  numeroFamiliares: number;
-  priority: boolean;
-}
-
 export function Beneficiarios() {
-  const [activeTab, setActiveTab] = useState<'familias' | 'visitas' | 'aprovados'>('familias');
+  const [activeTab, setActiveTab] = useState<'familias' | 'visitas'>('familias');
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   const [familiasData, setFamiliasData] = useState<Familia[]>([]);
   const [visitasData, setVisitasData] = useState<Visit[]>([]);
-  const [aprovadosData, setAprovadosData] = useState<Aprovado[]>([]);
 
-  const handleTabClick = (tab: 'familias' | 'visitas' | 'aprovados') => {
+  const handleTabClick = (tab: 'familias' | 'visitas') => {
     setActiveTab(tab);
     setSearchTerm('');
   };
-
 
   const deleteFamilia = async (id: number) => {
     const confirmDelete = window.confirm('Você tem certeza que deseja excluir este item?');
     if (!confirmDelete) return;
 
     try {
-      if (activeTab === 'familias') {
-        await api.delete(`/familias/${id}`);
-      } else if (activeTab === 'aprovados') {
-        await api.delete(`/aprovados/${id}`);
-      }
+      await api.delete(`/familias/${id}`);
       console.log('Item excluído com sucesso!');
       fetchData();
     } catch (err) {
@@ -60,18 +46,16 @@ export function Beneficiarios() {
     }
   };
 
-  const moveToAprovados = async (familia: Familia) => {
+  const deleteVisita = async (id: number) => {
+    const confirmDelete = window.confirm('Você tem certeza que deseja excluir esta visita?');
+    if (!confirmDelete) return;
+  
     try {
-
-      const familiaToMove = await api.get(`/familias/${familia.id}`)
-      if (familiaToMove) {
-        await api.post('/aprovados', familia);
-        await api.delete(`/familias/${familia.id}`);
-      }
-      console.log('Família movida para aprovados com sucesso!');
+      await api.delete(`/visitas/${id}`);
+      console.log('Visita excluída com sucesso!');
       fetchData();
     } catch (err) {
-      console.log("Erro ao mover família para aprovados: " + err);
+      console.log("Erro ao excluir visita: " + err);
     }
   };
 
@@ -96,14 +80,6 @@ export function Beneficiarios() {
         console.log("Error during fetch: " + err);
       }
     }
-    if (activeTab === 'aprovados') {
-      try {
-        const response = await api.get("/aprovados");
-        setAprovadosData(response.data);
-      } catch (err) {
-        console.log("Error during fetch: " + err);
-      }
-    }
   };
 
   useEffect(() => {
@@ -111,58 +87,57 @@ export function Beneficiarios() {
   }, [activeTab]);
 
   const renderTableData = () => {
-    let dataToRender: (Familia | Visit | Aprovado)[] = [];
-
     if (activeTab === 'familias') {
-      dataToRender = familiasData.filter(item =>
+      const filteredFamilias = familiasData.filter(item =>
         item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
       );
-    } else if (activeTab === 'visitas') {
-      dataToRender = visitasData.filter(item =>
-        item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    } else if (activeTab === 'aprovados') {
-      dataToRender = aprovadosData.filter(item =>
-        item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    return dataToRender.map((item, index) => {
-      const itemName = 'name' in item ? item.name : '';
-      const isPriority = 'priority' in item ? item.priority : false;
-
-      return (
-        <tr key={index}>
-          <td>{itemName}</td>
-          {activeTab === 'familias' && (
-            <td>
-              <input
-                type="checkbox"
-                className="prioridade-checkbox"
-                checked={isPriority}
-                onClick={() => moveToAprovados(item as Familia)}
-              />
-              <span>Prioridade</span>
-            </td>
-          )}
+  
+      return filteredFamilias.map((item) => (
+        <tr key={item.id}>
+          <td>{item.name}</td>
+          <td>
+            <span>Status: {item.status}</span>
+          </td>
           <td>
             <button
               className="table-btn dados-btn"
-              onClick={() => {
-                if (activeTab === 'visitas') {
-                  navigate('/visitas');
-                } else {
-                  navigate(`/atualizar/${item.id}`);
-                }
-              }}>
+              onClick={() => navigate(`/atualizar/${item.id}`)}
+            >
               DADOS
             </button>
             <button onClick={() => deleteFamilia(item.id)} className="table-btn excluir-btn">EXCLUIR</button>
           </td>
         </tr>
+      ));
+    } else if (activeTab === 'visitas') {
+      const filteredVisitas = visitasData.filter(item =>
+        item?.nomeFamilia?.toLowerCase().includes(searchTerm.toLowerCase())
       );
-    });
+    
+      return filteredVisitas.map((item) => (
+        <tr key={item.id}>
+          <td>{item.nomeFamilia}</td>
+          <td>
+            <span>Relatório: {item.relatorio}</span>
+          </td>
+          <td>
+            <button
+              className="table-btn dados-btn"
+              onClick={() => navigate(`/visitas/${item.id}`)}
+            >
+              DADOS
+            </button>
+            <button onClick={() => deleteVisita(item.id)} className="table-btn excluir-btn">EXCLUIR</button>
+          </td>
+        </tr>
+      ));
+    }
+    
+  
+    return null;
   };
+  
+  
 
   return (
     <div className="beneficiarios-page">
@@ -182,20 +157,24 @@ export function Beneficiarios() {
             onChange={handleSearchChange}
           />
           <div className="buttons">
-            {activeTab === 'aprovados' && (
-              <button className="btn enviar-btn">Enviar para Assembleia</button>
-            )}
             <button className="btn registrar-btn" onClick={() => navigate('/registro')}>Registrar Família</button>
+            {activeTab === 'visitas' && (
+              <button className="btn enviar-btn" onClick={() => navigate('/registroVisita')}>Adicionar Visita</button>
+            )}
+            {activeTab === 'familias' && (
+              <button className="btn enviar-btn" onClick={() => {}}>
+                Enviar Para Assembleia
+              </button>
+            )}
           </div>
         </div>
       </div>
-
+  
       <div className="tabs">
         <button className={`tab-btn ${activeTab === 'familias' ? 'active' : ''}`} onClick={() => handleTabClick('familias')}>Famílias</button>
         <button className={`tab-btn ${activeTab === 'visitas' ? 'active' : ''}`} onClick={() => handleTabClick('visitas')}>Visitas</button>
-        <button className={`tab-btn ${activeTab === 'aprovados' ? 'active' : ''}`} onClick={() => handleTabClick('aprovados')}>Aprovados</button>
       </div>
-
+  
       <div className="table-container">
         <table className="familias-table">
           <tbody>
