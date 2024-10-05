@@ -63,6 +63,7 @@ export function Beneficiarios() {
     if (activeTab === 'familias') {
       try {
         const response = await api.get("/familias");
+        console.log(response.data)
         setFamilias(response.data);
         setFilteredFamilies(response.data); // Atualiza o estado com as famílias recebidas
       } catch (err) {
@@ -87,9 +88,9 @@ export function Beneficiarios() {
     if (activeTab === 'familias') {
       return filteredFamilies.map((item) => (
         <tr key={item.id}>
-          <td>{item.name}</td>
+          <td>{item.nomeFamilia}</td>
           <td>
-            <span>Status: {item.status}</span>
+            <span>Status: {item.statusFamilia}</span>
           </td>
           <td>
             <button

@@ -1,17 +1,17 @@
 import { BiArrowBack } from 'react-icons/bi';
 import { GiThreeFriends } from 'react-icons/gi';
 import { FaUsers, FaBox, FaMoneyBill, FaCalendarAlt, FaBuilding, FaNewspaper } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/loginContext';
 
 const DashboardPage = () => {
   const {navigate} = useAuth();
 
   return (
-    <div className="container text-center my-5" style={{ padding: "200px" }}>
+    <div className="container text-center my-5" style={{ padding: "1%" }}>
       <div className="row justify-content-center">
         <div className="d-flex justify-content-start mb-3 m-3">
           <BiArrowBack
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
             size={32}
             style={{
               cursor: "pointer",
