@@ -1,5 +1,5 @@
 import '@styles/global.scss';
-import '@styles/visualizarInfo.scss';
+import '@styles/forms.scss';
 
 const Forms = () => {
     return (
@@ -39,18 +39,14 @@ const Forms = () => {
                             <option>+5</option>
                         </select>
                     </div>
+
+                    <div className="button-group">
+                        <button type="submit" className="enviar-btn" >Enviar</button>
+                    </div>
                 </div>
-            </div>
-
-
-            <div className="button-group">
-                <button type="submit" className="enviar-btn" >Enviar</button>
             </div>
         </div>
     );
 };
 
 export default Forms;
-
-
-
