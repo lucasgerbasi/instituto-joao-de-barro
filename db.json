@@ -1,4 +1,43 @@
 {
-  "familias": [],
-  "visitas": []
+  "familias": [
+    {
+      "id": "5e54",
+      "nomeFamilia": "ooooo",
+      "statusFamilia": "Em análise",
+      "nomePrincipal": "asdada",
+      "cpf": "12345678910",
+      "endereco": "adsasasf",
+      "cep": "12345678",
+      "rendaMensal": "fafas",
+      "telefone1": "asffasf",
+      "telefone2": "asffas",
+      "comoChegou": "asfaf",
+      "familiarExtras": "1",
+      "dadosImovel": "Casa",
+      "necessidadeFamilia": "Só reforma"
+    }
+  ],
+  "visitas": [
+    {
+      "nomeFamilia": "asdads",
+      "relatorio": "asdads",
+      "dropdown1": "Option 1",
+      "imagem": null,
+      "id": "fa41"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "benef@email.com",
+      "password": "123456",
+      "role": "BENEFICIARIO"
+    },
+    {
+      "id": "2",
+      "email": "volun@email.com",
+      "password": "123456",
+      "role": "VOLUNTARIO"
+    }
+  ]
 }

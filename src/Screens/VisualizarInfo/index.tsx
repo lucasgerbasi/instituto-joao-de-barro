@@ -1,5 +1,7 @@
 import '@styles/global.scss';
 import '@styles/visualizarInfo.scss';
+import { Navbar } from '../../components/Navbar';
+import { Footer } from '../../components/Footer';
 
 const VisualizarInfo = () => {
     const statusOptions = ['Aprovado', 'Negado', 'Em espera'];
@@ -7,6 +9,10 @@ const VisualizarInfo = () => {
 
     return (
         <div className="visualizar-informacoes">
+            <div>
+                <Navbar />
+            </div>
+            
             <h1 className="subtitle">Visualizar Informações da Família</h1>
             <p className="description">
                 Visualize as informações da família.
@@ -46,8 +52,12 @@ const VisualizarInfo = () => {
                     </div>
                 </div>
             </div>
+            <div>
+                <Footer />
+            </div>
         </div>
     );
+    
 };
 
 export default VisualizarInfo;

@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-interface loginProps {
-  onLogin: (email: string, password: string) => void;
-}
+import { useAuth } from "../../contexts/loginContext";
 
-const LoginForm = ({ onLogin }: loginProps) => {
+const LoginForm = () => {
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const {login, user, navigate} = useAuth()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(email, password);
+    login({email, password});
+
+    if(user) {
+      console.log('Logado com sucesso')
+      navigate('/dashboard')
+    }
   };
 
   return (
@@ -42,10 +47,8 @@ const LoginForm = ({ onLogin }: loginProps) => {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary w-100">
-        <Link className="text-decoration-none text-light" to="/dashboard">
-          Login
-        </Link>
+      <button type="submit" onClick={handleSubmit} className="btn btn-primary w-100">
+       Login
       </button>
     </form>
   );

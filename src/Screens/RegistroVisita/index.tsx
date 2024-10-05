@@ -2,10 +2,12 @@ import { useState } from 'react';
 import '@styles/global.scss';
 import '@styles/registroVisita.scss';
 import { api } from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/loginContext';
+import { Navbar } from '../../components/Navbar';
+import { Footer } from '../../components/Footer';
 
 const RegistroVisita = () => {
-    const navigate = useNavigate();
+    const {navigate} = useAuth();
 
     const [nomeBeneficiario, setNomeBeneficiario] = useState(''); 
     const [nomeVoluntarios, setNomeVoluntarios] = useState(''); 
@@ -29,7 +31,11 @@ const RegistroVisita = () => {
 
         try {
             await api.post('/visitas', data);
-            navigate('/beneficiarios');
+            if(location.pathname.includes("dashboard")) {
+                navigate('/dashboard/beneficiarios');
+            } else {
+                navigate('/beneficiarios');
+            }
         } catch (err) {
             console.log('Erro durante o registro: ' + err);
         }
@@ -41,10 +47,18 @@ const RegistroVisita = () => {
         setRelatorio('');
         setDropdown1('');
         setImagem(null);
+        if(location.pathname.includes("dashboard")) {
+            navigate('/dashboard/beneficiarios');
+        } else {
+            navigate('/beneficiarios');
+        }
     };
 
     return (
         <div className="registro-visita">
+            <div>
+                <Navbar />
+            </div>
             <h1 className="subtitle">Registro de Visita</h1>
             <p className="description">
                 Preencha os campos abaixo para registrar uma visita.
@@ -105,6 +119,9 @@ const RegistroVisita = () => {
                         <button onClick={resetForm} className="button discard-btn">DESCARTAR</button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <Footer />
             </div>
         </div>
     );

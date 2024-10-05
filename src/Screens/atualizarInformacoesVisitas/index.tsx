@@ -3,10 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '@styles/global.scss';
 import '@styles/atualizarInformacoesVisitas.scss';
 import { api } from '../../api';
+import { Navbar } from '../../components/Navbar';
+import { Footer } from '../../components/Footer';
+import { useAuth } from '../../contexts/loginContext';
 
 const AtualizarInformacoesVisitas = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
+    const {navigate} = useAuth();
     const [nomeFamilia, setNomeFamilia] = useState('');
     const [relatorio, setRelatorio] = useState('');
     const [dropdown1, setDropdown1] = useState('');
@@ -51,6 +54,9 @@ const AtualizarInformacoesVisitas = () => {
 
     return (
         <div className="atualizar-informacoes-visitas">
+            <div>
+                <Navbar />
+            </div>
             <h1 className="subtitle">Atualizar Informações da Visita</h1>
             <p className="description">
                 Preencha os campos abaixo para atualizar as informações da visita.
@@ -103,6 +109,9 @@ const AtualizarInformacoesVisitas = () => {
                         <button onClick={handleDiscard} className="button discard-btn">DESCARTAR</button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <Footer />
             </div>
         </div>
     );
