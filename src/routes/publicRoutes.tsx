@@ -8,10 +8,11 @@ import Forms from "../Screens/Forms";
 import { Login } from "../Screens/Login";
 
 export function PublicRoutes() {
+
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />}>
-        <Route index element={<Main />} />
+      <Route path="/" element={<LandingPage />}> 
+        <Route index element={<Main />} />   
         <Route path="contatos" element={<Contact />} />
         <Route path="sobre" element={<About />} />
         <Route path="voluntarios" element={<Voluntarios />} />

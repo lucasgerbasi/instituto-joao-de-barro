@@ -1,4 +1,8 @@
+import { ReactNode } from "react";
+
 export interface Familia {
+    statusFamilia: ReactNode;
+    nomeFamilia: ReactNode;
     id: number;
     name: string;
     renda: number;

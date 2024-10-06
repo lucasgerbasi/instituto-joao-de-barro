@@ -54,8 +54,15 @@ export function Beneficiarios() {
     if (value.trim() === '') {
       setFilteredFamilies(familias); // Se vazio, mostra todas as famílias
     } else {
-      // Filtra as famílias conforme o termo de busca
-      setFilteredFamilies(familias.filter(item => item.name.toLowerCase().includes(value.toLowerCase())));
+      // Filtra as famílias conforme o termo de busca nos nomes
+      const filtered = familias.filter(item => 
+        (typeof item.nomeFamilia === 'string' && item.nomeFamilia.toLowerCase().includes(value.toLowerCase())) 
+      );
+      
+      // Log para depuração
+      console.log("Famílias filtradas:", filtered);
+      
+      setFilteredFamilies(filtered);
     }
   };
 

@@ -13,6 +13,12 @@
       "email": "volun@email.com",
       "password": "123456",
       "role": "VOLUNTARIO"
+    },
+    {
+      "id": "3",
+      "email": "benef@gmail.com",
+      "password": "123456",
+      "role": "BENEFICIARIO"
     }
   ]
 }
